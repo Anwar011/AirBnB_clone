@@ -67,13 +67,13 @@ class BaseModel:
         """
         to_dict is a method that get an prepared dict
         Return:
-            new dictionary
+             my dict
         """
-        dictionary = {}
+        my dict = {}
         for key in self.__dict__:
-            dictionary[key] = self.__dict__[key]
-        dictionary["__class__"] = self.__class__.__name__
-        dictionary["created_at"] = self.created_at.isoformat()
-        dictionary["updated_at"] = self.updated_at.isoformat()
-        return dictionary
+            my dict[key] = self.__dict__[key]
+        my dict["__class__"] = self.__class__.__name__
+        my dict["created_at"] = self.created_at.isoformat()
+        my dict["updated_at"] = self.updated_at.isoformat()
+        return my dict
 
