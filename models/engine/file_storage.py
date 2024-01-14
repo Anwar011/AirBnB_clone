@@ -52,4 +52,3 @@ class FileStorage:
                 self.new(eval(my_dic[key]["__class__"])(**my_dic[key]))
         except IOError:
             pass
-
