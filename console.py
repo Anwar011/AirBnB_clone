@@ -6,7 +6,7 @@ import cmd
 from models.base_model import BaseModel
 from models.user import User
 from models.engine.file_storage import FileStorage
-from models import storage
+from models import the_storage
 from models.state import State
 from models.city import City
 from models.place import Place
@@ -39,7 +39,7 @@ class HBNBCommand(cmd.Cmd):
             print("** class doesn't exist **")
         else:
             new_object = eval(className[0])()
-            storage.save()
+            the_storage.save()
             print(new_object.id)
 
     def check_id(self, line):
@@ -56,7 +56,7 @@ class HBNBCommand(cmd.Cmd):
         if len(lines_list) < 2:
             print("** instance id missing **")
             return False
-        if lines_list[0]+"."+lines_list[1] in storage.all():
+        if lines_list[0]+"."+lines_list[1] in the_storage.all():
             return True
         print("** no instance found **")
 
@@ -77,7 +77,7 @@ class HBNBCommand(cmd.Cmd):
         """show is a command to print object representation"""
         lines_list = shlex.split(line)
         if self.check_id(line):
-            print(storage.all()["{}.{}\
+            print(the_storage.all()["{}.{}\
 ".format(lines_list[0], lines_list[1])])
             
 
@@ -85,24 +85,24 @@ class HBNBCommand(cmd.Cmd):
         """destroy is a command that destroy object"""
         lines_list = shlex.split(line)
         if self.check_id(line):
-            del storage.all()["{}.{}\
+            del the_storage.all()["{}.{}\
 ".format(lines_list[0], lines_list[1])]
-            storage.save()
+            the_storage.save()
 
     def do_all(self, line):
         """all is a command that prints all objects representation """
         # TODO: all BaseModel dgf
         if line == "":
             list_str = []
-            for key in storage.all():
-                list_str.append(str(storage.all()[key]))
+            for key in the_storage.all():
+                list_str.append(str(the_storage.all()[key]))
             print(list_str)
         else:
             if line.split()[0] in HBNBCommand.classes_list:
                 list_str = []
-                for key in storage.all():
+                for key in the_storage.all():
                     if line.split()[0] in key:
-                        list_str.append(str(storage.all()[key]))
+                        list_str.append(str(the_storage.all()[key]))
                 print(list_str)
             else:
                 print("** class doesn't exist **")
@@ -112,7 +112,7 @@ class HBNBCommand(cmd.Cmd):
         if self.check_id(line):
             if self.check_attr(line):
                 lines_list = shlex.split(line)
-                obj = storage.all()[f"{lines_list[0]}.{lines_list[1]}"]
+                obj = the_storage.all()[f"{lines_list[0]}.{lines_list[1]}"]
                 if hasattr(obj, lines_list[2]):
                     # TODO: handle casting error by using try except
                     try:
@@ -163,7 +163,7 @@ class HBNBCommand(cmd.Cmd):
             if line[:-8] != "":
                 if line[:-8] in HBNBCommand.classes_list:
                     num_obj = 0
-                    for key in storage.all():
+                    for key in the_storage.all():
                         if line[:-8] in key:
                             num_obj += 1
                     print(num_obj)
