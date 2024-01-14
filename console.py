@@ -44,7 +44,7 @@ class HBNBCommand(cmd.Cmd):
 
     def check_id(self, line):
         """
-        check if class name and id exist or not 
+        check if class name and id exist or not
         """
         lines_list = shlex.split(line)
         if len(lines_list) == 0:
@@ -79,7 +79,6 @@ class HBNBCommand(cmd.Cmd):
         if self.check_id(line):
             print(the_storage.all()["{}.{}\
 ".format(lines_list[0], lines_list[1])])
-            
 
     def do_destroy(self, line):
         """destroy is a command that destroy object"""
@@ -116,7 +115,8 @@ class HBNBCommand(cmd.Cmd):
                 if hasattr(obj, lines_list[2]):
                     # TODO: handle casting error by using try except
                     try:
-                        value = type(getattr(obj, lines_list[2]))(lines_list[3])
+                        value = type(getattr(obj, lines_list[2]))
+                        (lines_list[3])
                         setattr(obj, lines_list[2], value)
                     except ValueError:
                         pass
@@ -210,4 +210,3 @@ class HBNBCommand(cmd.Cmd):
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
-

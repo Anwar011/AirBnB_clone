@@ -5,4 +5,3 @@ from .engine.file_storage import FileStorage
 
 the_storage = FileStorage()
 the_storage.reload()
-

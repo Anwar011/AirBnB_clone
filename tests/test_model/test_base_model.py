@@ -1,9 +1,13 @@
 #!/usr/bin/python3
 """
-
+Unittest classes:
+    TestBaseModel_instantiation
+    TestBaseModel_save
+    TestBaseModel_to_dict
 """
 import unittest
 from models.base_model import BaseModel
+
 
 class TestBasemodel(unittest.TestCase):
     def test_init(self):
@@ -17,7 +21,7 @@ class TestBasemodel(unittest.TestCase):
         initial_updated_at = my_model.updated_at
         current_updated_at = my_model.save()
         self.assertNotEqual(initial_updated_at, current_updated_at)
-    
+
     def test_to_dict(self):
         """
         Test for to_dict method
@@ -38,6 +42,7 @@ class TestBasemodel(unittest.TestCase):
         self.assertTrue(str(my_model).startswith('[BaseModel]'))
         self.assertIn(my_model.id, str(my_model))
         self.assertIn(str(my_model.__dict__), str(my_model))
+
 
 if __name__ == "__main__":
     unittest.main()

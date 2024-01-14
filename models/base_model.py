@@ -67,7 +67,7 @@ class BaseModel:
         """
         to_dict is a method that get an prepared dict
         Return:
-             my_dic
+        my_dic
         """
         my_dic = {}
         for key in self.__dict__:
@@ -76,4 +76,3 @@ class BaseModel:
         my_dic["created_at"] = self.created_at.isoformat()
         my_dic["updated_at"] = self.updated_at.isoformat()
         return my_dic
-
